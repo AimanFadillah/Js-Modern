@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawa</title>
+</head>
+<body>
+    
+
+
+    <script>
+        // =====================================================================
+
+        // OBJECK LITERAL
+        // { TIDAK EFEKTIF UNTUK OBJECK YANG BANYAK }
+
+        // let mahasiswa = { 
+        //     nama:"aiman",
+        //     energy: 10,
+
+        //     makan:function(porsi){
+        //         this.energy = this.energy + porsi;
+
+        //         console.log(`Hello ${this.nama},Selamat makan`)
+        //     }
+
+        // }
+
+        // ======================================================================
+
+        // FUNCTION DECLATION
+        
+        //     const methodSiswa = {
+
+        //         makan : function (porsi) {
+        //         this.energy = this.energy + porsi;
+        //         console.log(`Halo ${this.nama},Selamat makan`)
+        //         },
+
+        //         main : function (jam) {
+        //             this.energy = this.energy - jam;
+        //             console.log(`Halo ${this.nama},Selamat Bermain`)
+        //         },
+
+        //         tidur : function (jam) {
+        //             this.energy = this.energy + jam * 2;
+        //             console.log(`Halo ${this.nama},Selamat Tidur `)
+        //         }
+
+        //     };
+
+
+
+        // function Mahasiswa(nama,energy){
+        //     let mahasiswa = Object.create(methodSiswa);
+        //     mahasiswa.nama = nama;
+        //     mahasiswa.energy = energy;
+           
+        //     return mahasiswa;
+        // } 
+
+        // let aiman = Mahasiswa('aiman',20);
+        // let budi = Mahasiswa("budi",30);
+
+        // ======================================================================= 
+
+        // PROTOTYPE
+
+            
+        // function Mahasiswa(nama,energy){
+        //     // let mahasiswa = Object.create(methodSiswa);
+        //     // let Mahasiswa = {};
+        //     // let this = Object.create(Mahasiswa.prototype);
+        //     this.nama = nama;
+        //     this.energy = energy;
+           
+        //     // return this;
+        // } 
+
+        // Mahasiswa.prototype.makan = function (porsi) {
+        //     this.energy = this.energy + porsi;
+        //     return `Halo ${this.nama},Selamat Makan`;
+        // }
+
+        // Mahasiswa.prototype.main = function (jam) {
+        //     this.energy = this.energy - jam;
+        //     return `Halo ${this.nama},Selamat Bermain `
+        // }
+
+        // Mahasiswa.prototype.tidur = function (jam) {
+        //     this.energy = this.energy + jam * 2;
+        //     return `Halo ${this.nama},Selamat tidur`
+
+        // }
+
+
+
+        // let aiman = new Mahasiswa("aiman",10);
+
+        // ======================================================================= 
+
+            // CLASS
+
+            class Mahasiswa {
+                constructor (nama,energy){
+                    this.nama = nama;
+                    this.energy = energy;
+                }
+
+                makan = function (porsi) {
+                    this.energy = this.energy + porsi;
+                    return `Halo ${this.nama},Selamat Makan`;
+                }
+
+                    main = function (jam) {
+                        this.energy = this.energy - jam;
+                        return `Halo ${this.nama},Selamat Bermain `
+                    }
+
+                    tidur = function (jam) {
+                        this.energy = this.energy + jam * 2;
+                        return `Halo ${this.nama},Selamat tidur`
+
+                    }
+
+
+            }
+
+            let aiman = new Mahasiswa("aiman",100);
+
+        // ========================================================================
+
+        // CONSTRUCTOR FUNCTION
+
+        // function Mahasiswa(nama,energy){
+        //     this.nama = nama;
+        //     this.energy = energy;
+
+        //     this.makan = function (porsi) {
+        //         this.energy = this.energy + porsi;
+        //         console.log(`Halo ${this.nama},Selamat makan`)
+        //     }
+
+        //     this.main = function (jam) {
+        //         this.energy = this.energy - jam;
+        //         console.log(`Halo ${this.nama},Selamat Bermain`)
+        //     }
+
+
+        // } 
+
+        // let aiman = new Mahasiswa("aiman",10);
+
+
+    </script>
+
+</body>
+</html>

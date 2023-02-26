@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <table id="myTable">
+        <thead>
+          <tr>
+            <th>Barang</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Barang A</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>Barang B</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td>Barang C</td>
+            <td>200</td>
+          </tr>
+        </tbody>
+      </table>
+      <button onclick="sortTable()">Urutkan</button>
+      
+      <script>
+
+        function sortTable() {
+            let table, rows, switching, i, x, y, shouldSwitch; // buat beberapa table
+            table = document.getElementById("myTable"); // ambil <table>
+            switching = true; // untuk looping
+            while (switching) {
+                switching = false; // jika dibawah berubah menjadi true maka akan looping lagi
+
+                rows = table.rows; // Rows Mengambil apa yang ada di ada didalam table
+
+                for (i = 1; i < (rows.length - 1); i++) {// untuk mencari terbesar dan terkecil
+                    shouldSwitch = false;
+                    x = parseInt(rows[i].getElementsByTagName("td")[1].innerHTML); // ngambil stock pertama
+                    y = parseInt(rows[i + 1].getElementsByTagName("td")[1].innerHTML); // ngambil stock kedua
+
+                    if (x < y) { // jika stock pertama lebih besar dari stock kedua make akan di benerin
+                        shouldSwitch = true; // supaya bisa dibenerin
+                        break; // menghentikan looping
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);// Menukar Posisi
+                    switching = true; // ngecek lagi
+                }
+            }
+        }
+
+
+      </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website API</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="row mt-5">
+            <div class="col">
+                <h1>Movie</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control inputCari" placeholder="Pencarian" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-info text-light searchButton" type="button" id="button-addon2">Cari</button>
+                </div>                  
+            </div>
+        </div>
+
+        <div class="row" id="wadahFilm" >
+            
+        </div>
+
+    </div>
+
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="filmsKe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="filmsKe">Film</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>    
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script>
+
+    $(".searchButton").on("click",function () {
+        $.ajax({
+        url: "http://www.omdbapi.com/?i=tt3896198&apikey=a61fa869&s=" + $(".inputCari").val(),
+        success : hasil => {
+            let film = hasil.Search;
+            let card = "" ;
+
+            for(films of film){
+                card += Card(films);
+                $("#wadahFilm").html(card);
+            }
+
+            $(".detailFilm").on("click",function () {
+               $.ajax({
+                url:`http://www.omdbapi.com/?apikey=a61fa869&i=` + $(this).data("imdbid"),
+                success: hasil => {
+                    let filmDetail = Detail(hasil);
+                    $(".modal-body").html(filmDetail)
+                }   
+               })
+            });
+
+        },
+        error : gagal => {console.log(gagal.responseText)}
+    });
+    })
+
+    
+    function Card (films){
+       return `
+                <div class="col-md-4 my-3">
+                    <div class="card" >
+                        <img src="${films.Poster}" class="card-img-top" >
+                        <div class="card-body">
+                        <h5 class="card-title">${films.Title}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${films.Year}</h6>
+                        <a href="#" class="btn btn-primary detailFilm" data-bs-toggle="modal" data-bs-target="#filmsKe" data-imdbid="${films.imdbID}" >Detail</a>
+                        </div>
+                    </div>
+                </div>
+                `
+    }
+
+    function Detail (hasil){
+        return`
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="${hasil.Poster}" class="img-fluid">
+                            </div>
+                            <div class="col-md">
+                                <ul class="list-group">
+                                    <li class="list-group-item active" aria-current="true"><h4>${hasil.Title}(${hasil.Year})</h4></li>
+                                    <li class="list-group-item"><strong>Director : </strong>${hasil.Director}</li>
+                                    <li class="list-group-item"><strong>Actors : </strong>${hasil.Actors}</li>
+                                    <li class="list-group-item"><strong>Writer : </strong>${hasil.Writer}</li>
+                                    <li class="list-group-item"><strong>Plot : </strong><br>${hasil.Plot}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    `
+    }
+
+</script>
+</html>

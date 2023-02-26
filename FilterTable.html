@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Filter Tabel Barang</title>
+	<script>
+		function filterTable(criterion) {
+			    var table = document.getElementById("barangTable");  // <table> diambil
+			    var rows = table.getElementsByTagName("tr"); // tr array diambil
+
+			    // Loop melalui semua baris dan sembunyikan/munculkan yang memenuhi kriteria
+                for (var i = 1; i < rows.length; i++) { // mulai dari i = 1 untuk menghindari header
+
+                    var row = rows[i]; // tr didapat
+                    var cell = row.getElementsByTagName("td")[1]; // mengambil data ke 1 mulai dari 0
+                    var value = cell.textContent; // Mengambil text 
+
+                    
+                    if (criterion == "cair" && value == "cair") {// jika ilih cair dan value cair maka tampilkan
+                            row.style.display = "";
+                        } else if (criterion == "padat" && value == "padat") { // jika pilih padat dan value padat maka tampillkan
+                            row.style.display = ""; 
+                        } else if (criterion == "all"){ // jika piih all maka tampilkan semua dia tidak minta value
+                            row.style.display = "";
+                        }  else { // sisa nya di hilangkan
+                            row.style.display = "none";
+                        }
+                }
+
+            
+		}
+
+        function sortTable() {
+            let table, rows, switching, i, x, y, shouldSwitch; // buat beberapa table
+            table = document.getElementById("barangTable"); // ambil <table>
+            switching = true; // untuk looping
+            while (switching) {
+                switching = false; // jika dibawah berubah menjadi true maka akan looping lagi
+
+                rows = table.rows; // Rows Mengambil apa yang ada di ada didalam table
+
+                for (i = 1; i < (rows.length - 1); i++) {// untuk mencari terbesar dan terkecil
+                    shouldSwitch = false;
+                    x = parseInt(rows[i].getElementsByTagName("td")[2].innerHTML); // ngambil stock pertama
+                    y = parseInt(rows[i + 1].getElementsByTagName("td")[2].innerHTML); // ngambil stock kedua
+
+                    if (x < y) { // jika stock pertama lebih besar dari stock kedua make akan di benerin
+                        shouldSwitch = true; // supaya bisa dibenerin
+                        break; // menghentikan looping
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);// Menukar Posisi
+                    switching = true; // ngecek lagi
+                }
+            }
+        }
+
+        function Terendah() {
+            let table, rows, switching, i, x, y, shouldSwitch; // buat beberapa table
+            table = document.getElementById("barangTable"); // ambil <table>
+            switching = true; // untuk looping
+            while (switching) {
+                switching = false; // jika dibawah berubah menjadi true maka akan looping lagi
+
+                rows = table.rows; // Rows Mengambil apa yang ada di ada didalam table
+
+                for (i = 1; i < (rows.length - 1); i++) {// untuk mencari terbesar dan terkecil
+                    shouldSwitch = false;
+                    x = parseInt(rows[i].getElementsByTagName("td")[2].innerHTML); // ngambil stock pertama
+                    y = parseInt(rows[i + 1].getElementsByTagName("td")[2].innerHTML); // ngambil stock kedua
+
+                    if (x > y) { // jika stock pertama lebih kecil dari stock kedua make akan di benerin
+                        shouldSwitch = true; // supaya bisa dibenerin
+                        break; // menghentikan looping
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);// Menukar Posisi
+                    switching = true; // ngecek lagi
+                }
+            }
+        }
+
+        function searchTable() {
+            var input = document.getElementById("cari").value.toLowerCase();// Ambil input data 
+            var rows = document.getElementsByTagName("tr");// Ambil tr
+
+            for (var i = 0; i < rows.length; i++) {// Mengambil data
+                var data = rows[i].getElementsByTagName("td"); // Ambil td
+                var match = false;// Untuk mematikan if
+
+                for (var j = 0; j < data.length; j++) {
+                    if (data[j].innerHTML.toLowerCase().indexOf(input) > -1) { // jika data melebihi -1 maka data muncul
+                        match = true // untuk mengaktifkan if
+                        break; // menghentikan pengecekkan 
+                    }
+                }
+
+                if (match) {
+                    rows[i].style.display = ""; // memunculkan data yang ada 
+                    } else {
+                    rows[i].style.display = "none"; // menghilakan data yang gk ada
+                    }
+            }
+
+            
+        }
+
+        // // Tambahkan event listener untuk tombol "Cari"
+        // document.getElementById("searchButton").addEventListener("click", searchTable);
+
+	</script>
+</head>
+<body>
+
+    <!-- id Table Diambil -->
+    <input type="text" onkeyup="searchTable()" id="cari">
+	<table id="barangTable">
+        <!-- tr Diambil -->
+        <!-- <thead> -->
+            <tr>
+                <th>Nama Barang</th>
+			    <th>Jenis</th>
+			    <th>Stok</th>
+		    </tr>
+        <!-- </thead> -->
+        <!-- <tbody> -->
+                <tr>
+                <td>Sabun Mandi</td>
+                <td>padat</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Shampo</td>
+                <td>cair</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td>Pasta Gigi</td>
+                <td>padat</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Minyak Goreng</td>
+                <td>cair</td>
+                <td>5</td>
+            </tr>
+        <!-- </tbody>    -->
+	</table>
+	<button onclick="filterTable('cair')">Barang Cair</button>
+	<button onclick="filterTable('padat')">Barang Padat</button>
+	<button onclick="filterTable('all')">Semua Barang</button>
+	<button onclick="sortTable()">Tertinggi</button>
+	<button onclick="Terendah()">Terendah</button>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jawa</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+        // =================================================================
+
+        // EXECUTION CONTEXT
+
+        // ==================================================================
+
+        // console.log(nama);
+        // var nama = "aiman"
+
+        // creation phase pada global context
+
+        // nama var = undefined
+        // nama function = fn()
+        // hoisting 
+        // 
+        // window = Global object
+        // this = window
+
+        // execuition phase
+
+        // console.log( sayHello() );
+        
+        // var nama = "aiman";
+        // var umur = 33;
+        
+
+        // function sayHello () {
+        //     return `Halo nama saya ${this.nama} umur saya ${this.umur}`;
+        // }
+
+        // function membuat local exection context;
+        // yang di dalam terdapat creation dan execution phase
+        // window
+        // arguments 
+        // hoisting
+
+            // var nama  = "aiman";
+            // var email = "@aiman";
+
+            // function cetakURL(){
+            //     console.log(arguments);
+            //     var url = "http://instagram.com//";
+            //     return url + nama;
+            // }
+
+            // console.log(cetakURL("budi","toni"));
+
+            // function a () {
+            //     console.log("ini a");
+
+            //     function b () {
+            //         console.log("ini b")
+
+            //         function c () {
+            //             console.log("ini c")
+            //         }
+
+            //         c();
+
+            //     }
+
+            //     b();
+
+            // }
+
+            // a();
+
+            // ========================================================
+
+            // CLOSUR
+
+            // ========================================================
+
+                // function init () {
+                //     // let nama = "aiman";
+                //     return function (nama) {
+                //         console.log(nama);
+                //     }
+        
+                // }
+                // let panggil = init();
+                // panggil("lohh");
+
+                // function salam (umur) {
+                //     return function(nama){
+                //         console.log(` Halo Nama Saya ${nama} Berumur ${umur} `)
+                //     }
+                // }
+
+                // let hai = salam("12");
+
+                // hai("aiman");
+
+                
+                let add = ( function () {
+                    let counter = 0;
+                    return function () {
+                        return ++counter;
+                    }
+                        
+                })();
+
+                // let a = add();
+               let counter = 100
+
+                console.log(add());
+                console.log(add());
+                console.log(add());
+
+
+    </script>
+
+</body>
+</html>

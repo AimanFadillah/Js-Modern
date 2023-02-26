@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Stock 10</p>
+    <button id="tambah">Tambah</button>
+    <p id="angka">1</p>
+    <button id="kurang">Kurang</button>
+</body>
+
+<script>
+    let angka = document.getElementById("angka");
+    let tambah = document.getElementById("tambah");
+    let kurang = document.getElementById("kurang");
+
+    if(parseInt(angka.innerHTML) === 1 ){
+        kurang.disabled = "true";
+    };
+
+
+    tambah.addEventListener("click",function () {
+        let hasil = parseInt(angka.innerHTML) + 1;
+        angka.innerHTML = hasil ;
+        if(hasil > 1 ){
+            kurang.disabled = "";
+        };
+        if(hasil === 10 ){
+            tambah.disabled = "true";
+        };
+    })
+
+    kurang.addEventListener("click",function () {
+        let hasil = parseInt(angka.innerHTML) - 1;
+        angka.innerHTML = hasil ;
+        if(hasil === 1 ){
+            kurang.disabled = "true";
+        };
+        if(hasil < 10 ){
+            tambah.disabled = "";
+        };
+    })
+
+</script>
+
+
+</html>

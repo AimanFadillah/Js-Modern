@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn{
+            margin-top: 20px;
+        }
+
+        .submit{
+            padding: 5px;
+            background-color: black;
+            border: 1px solid black;
+            border-radius: 3px;
+            color: white;
+        }
+
+        #addRow{
+            padding: 5px;
+            background-color: green;
+            border: 1px solid black;
+            border-radius: 3px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="get" >
+            <div id="inputFields">
+                <div class="inputRow" id="inputRow1">
+                    <input type="text" id="item1" name="item[]" required placeholder="Item name">
+                    <input type="text" id="price1" name="price[]" required placeholder="Price">
+                    
+                </div>
+            </div>
+
+            <div class="btn">
+                <span id="addRow" style="display: none;" >Tambah Row</span>
+                <button class="submit" type="submit">Submit</button>
+            </div>
+            
+      </form>
+
+      <script>
+        let addRow = document.getElementById("addRow");
+        let item = document.getElementById("item1");
+        
+        let price = document.getElementById("price1");
+        let tombol = document.getElementById("tombol");
+       
+        let loop = 1;
+        
+        item.addEventListener("input",function () {
+            if(item.value === ""){
+                addRow.style.display = "none";
+            }else if(price.value === ""){
+                addRow.style.display = "none";
+            }
+            else{
+                addRow.style.display = "inline";
+            }
+        })
+
+        price.addEventListener("input",function () {
+            if(price.value === ""){
+                addRow.style.display = "none";
+            }else if(item.value === ""){
+                addRow.style.display = "none";
+            }
+            else{
+                addRow.style.display = "inline";
+            }
+        })
+
+        addRow.addEventListener("click", function() {
+            let inputFields = document.getElementById("inputFields");
+           
+            let div = document.createElement("div");
+            
+            loop++
+            div.classList.add("inputRow" + loop);
+            div.style.marginTop = "10px";
+            div.id = "inputRow" + loop ;
+           
+            div.innerHTML = `<input type="text" name="item[]" id="item${loop}" required placeholder="Item name"> ` +
+                            `<input type="text" name="price[]" id="price${loop}" required placeholder="Price">` +
+                            `<span id="hapus${loop}"> Hapus</span>` ;
+           
+            inputFields.appendChild(div);
+            
+            let hapus = document.querySelector("#hapus" + loop);
+            hapus.addEventListener("click",function () {
+                inputFields.removeChild(div);
+            })
+        });
+      </script>
+</body>
+</html>

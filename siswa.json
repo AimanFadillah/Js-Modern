@@ -1,0 +1,22 @@
+[
+    {
+        "nama" : "aiman",
+        "kelas" : "RPL2",
+        "Umur" : 17 
+    },
+    {
+        "nama" : "budi",
+        "kelas" : "RPL21",
+        "Umur" : 18
+    },
+    {
+        "nama" : "kucing",
+        "kelas" : "RPL3",
+        "Umur" : 6 
+    },
+    {
+        "nama" : "cila",
+        "kelas" : "RPL4",
+        "Umur" : 2
+    }
+]
